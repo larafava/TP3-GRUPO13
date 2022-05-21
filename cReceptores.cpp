@@ -7,12 +7,16 @@ cReceptores::cReceptores(int _prioridad, string _patologia, string _nombre, stri
 	this->patologia = _patologia;
 }
 
-string cReceptores::to_string1() {
+cReceptores::~cReceptores()
+{
+}
+
+string cReceptores::To_string() {
 	return this->prioridad + "" + this->patologia + "";
 }
 
 void cReceptores::ImprimirReceptor() {
-	cout << this->to_string1();
+	cout << this->To_string();
 }
 
 bool cReceptores::esdonante() {

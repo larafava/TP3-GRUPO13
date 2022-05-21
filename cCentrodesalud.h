@@ -1,12 +1,15 @@
 #pragma once
 #include <string>
 #include "cEnum.h"
+#include "cFecha.h"
 
+class cDonantes;
 using namespace std;
 
 class cCentrodesalud
 {
 private:
+	tm fechita;
 	string nombre;
 	string direccion;
 	string partido;
@@ -20,12 +23,17 @@ public:
 #pragma endregion
 
 #pragma region Metodos
-	string to_string();
+	string To_string();
 	void ImprimirCentro();
+	bool RealizarTrasplante(cDonantes* donante);
+#pragma endregion
+
+#pragma region Getters
 	string getprovincia() { return this->provincia; };
 	string getpartido() { return this->partido; }
+	tm getfechahoy() { return this->fechita; };
+	
 
-	//eVehiculo asignarvehiculo(cCentrodesalud* aux);
 #pragma endregion
 };
 

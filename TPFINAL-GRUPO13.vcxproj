@@ -139,25 +139,33 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="cAmbulancia.cpp" />
+    <ClCompile Include="cAvion.cpp" />
     <ClCompile Include="cCentrodesalud.cpp" />
     <ClCompile Include="cDonantes.cpp" />
     <ClCompile Include="cEnum.cpp" />
     <ClCompile Include="cFecha.cpp" />
+    <ClCompile Include="cHelicoptero.cpp" />
     <ClCompile Include="cOrganos.cpp" />
     <ClCompile Include="cPaciente.cpp" />
     <ClCompile Include="cReceptores.cpp" />
+    <ClCompile Include="cVehiculo.cpp" />
     <ClCompile Include="INUNCAI.cpp" />
     <ClCompile Include="TPFINAL-GRUPO13.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="cAmbulancia.h" />
+    <ClInclude Include="cAvion.h" />
     <ClInclude Include="cCentrodesalud.h" />
     <ClInclude Include="cDonantes.h" />
     <ClInclude Include="cEnum.h" />
     <ClInclude Include="cFecha.h" />
+    <ClInclude Include="cHelicoptero.h" />
     <ClInclude Include="cLista.h" />
     <ClInclude Include="cOrganos.h" />
     <ClInclude Include="cPaciente.h" />
     <ClInclude Include="cReceptores.h" />
+    <ClInclude Include="cVehiculo.h" />
     <ClInclude Include="INUNCAI.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

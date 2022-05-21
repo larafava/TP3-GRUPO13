@@ -30,6 +30,7 @@ public:
     string To_string();
     void ImprimirFecha();
     bool fechamenor(cFecha*aux);
+   
    // void setdia(int dia);
 
   /*  cFecha(int dia, int mes, int anio, int horas, int minutos);

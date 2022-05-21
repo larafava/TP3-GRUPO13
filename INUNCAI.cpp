@@ -2,27 +2,48 @@
 
 using namespace std;
 
-void INUNCAI::RecibirPaciente(cPaciente*paciente) {
+cPaciente* INUNCAI::RecibirPaciente(cPaciente*paciente) {
+	cPaciente* tor = NULL;
 	if (paciente->esdonante()) {//lo agrego a la lista de pacientes
 		cDonantes* c = dynamic_cast<cDonantes*>(paciente);
 		this->IngresarPaciente(c);
 		int i;
 		for (i = 0; i < c->getlistaorganos()->getCA(); i++) {
 			cLista<cReceptores>* d= this->BuscarReceptores(*c->getlistaorganos()->Buscar(i), c->gettiposangre());
-			this->ElegirReceptor(d);
-			
+			cReceptores*r= this->ElegirReceptor(d);
+			eOrganos organo = *c->getlistaorganos()->Buscar(i);
+			this->match(c,r, i,this->ListaReceptores->BuscarAtPos(r));
+			tor = r;
+		}
+	
+
+	}
+	else
+	{
+		cReceptores* o = dynamic_cast<cReceptores*>(paciente);
+		
+		this->ListaReceptores->Insertar(o);
+		for (int i = 0; i < this->ListaDonantes->getCA(); i++)
+		{
+			int aux = this->ListaDonantes->Buscar(i)->coincidencia(o);
+
+			if (aux>-1 )
+				this->match(this->ListaDonantes->Buscar(i), o, aux, this->ListaReceptores->BuscarAtPos(o));
 		}
 	}
+	return tor;
 }
 void INUNCAI:: IngresarPaciente(cDonantes*c) {
 	if(this->ListaDonantes->BuscarAtPos(c)== -1) //en buscaratpos retorna -1 si no esta, por lo tanto estoy chequeando que no este en otra lista
-	this->ListaDonantes->Insertar(c);
+	this->ListaDonantes->Insertar(c);//Inserto si no esta en la lista
+	
 }
 
 INUNCAI::INUNCAI()
 {
 	this->ListaDonantes = new cLista<cDonantes>(20);
 	this->ListaReceptores = new cLista<cReceptores>(20);
+	this->ListaPaciente = new cLista<cPaciente>(40);
 
 }
 
@@ -70,4 +91,24 @@ cLista<cPaciente>* INUNCAI::Buscarporcentrodesalud(cCentrodesalud* centro) {
 			tor->Insertar(aux);
 	}
 	return tor;
+}
+
+void INUNCAI::match(cDonantes* a, cReceptores* r, int organo, int pos) {
+	if (a != NULL && r != NULL) {
+		a->asignarvehiculo(r->getcentro());
+		a->SetAblacion();
+		a->getlistaorganos()->Eliminar(organo);
+		
+		bool aux= r->getcentro()->RealizarTrasplante(a);//trasplante con exito
+		if (aux)
+			this->ListaReceptores->Eliminar(pos);
+		else
+			r->setprioridad(10);
+	}
+}
+void INUNCAI::ImprimirLista() { //imprimo las listas de donantes y receptores
+	cout << (*ListaDonantes);
+	cout << (*ListaReceptores);
+	cout << (*ListaPaciente);
+
 }

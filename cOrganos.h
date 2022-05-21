@@ -16,6 +16,6 @@ public:
 
 #pragma region Setter y Getters
 	void setFechaAblacion(cFecha*fechadeablacion);
-	cFecha* getfecha();
+	cFecha* getfecha() { return this->fechadeablacion; }
 };
 

@@ -1,4 +1,6 @@
 #include "cCentrodesalud.h"
+#include "cDonantes.h"
+
 #include <string>
 #include <iostream>
 
@@ -12,10 +14,21 @@ cCentrodesalud::cCentrodesalud(string _nombre, string _direccion, string _partid
 	this->telefono = _telefono;
 }
 
-string cCentrodesalud::to_string() {
+string cCentrodesalud::To_string() {
 	return this->nombre + "" + this->direccion + "" + this->partido + "" + this->provincia + "" + std::to_string(this->telefono) + "";
 }
 
 void cCentrodesalud::ImprimirCentro() {
-	cout << this->to_string();
+	cout << this->To_string();
+}
+
+bool cCentrodesalud::RealizarTrasplante(cDonantes *donante) {
+	if (donante->getfechaablacion().tm_mday == getfechahoy().tm_mday) {
+		bool tf = (rand() % 2) != 0;
+		if (tf == true) {
+			std::cout << "TRASPLANTE EXITOSO";
+			return true;
+		}
+	}
+	return false;
 }

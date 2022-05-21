@@ -4,6 +4,7 @@
 #include "cEnum.h"
 #include "cPaciente.h"
 
+
 using namespace std;
 
 class cReceptores :
@@ -23,12 +24,18 @@ public:
 #pragma endregion
 
 #pragma region Metodos
-	string to_string1();
+	string To_string();
 	void ImprimirReceptor();
 	bool esdonante();
+	void setprioridad(int prioridad) { this->prioridad = prioridad; }
+#pragma endregion 
+
+#pragma region Getters
 	int getprioridad();
 	cFecha* getfechalistaespera();
 	eOrganos getorgano();
 	eTipodeSangre gettiposangre() { return this->tipodesangre; }
+
+#pragma endregion
 };
 

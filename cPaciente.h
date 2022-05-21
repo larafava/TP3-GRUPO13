@@ -4,6 +4,10 @@
 #include "cFecha.h"
 #include "cEnum.h"
 #include "cCentrodesalud.h"
+#include "cVehiculo.h"
+#include "cAmbulancia.h"
+#include "cAvion.h"
+#include "cHelicoptero.h"
 
 using namespace std;
 
@@ -24,11 +28,15 @@ public:
 #pragma endregion
 
 #pragma region Metodos
-	string to_string();
+	string To_string();
 	void ImprimirPaciente();
-	eVehiculo asignarvehiculo(cCentrodesalud* aux);
-	eTipodeSangre gettiposangre() { return this->tipodesangre; }
-	cCentrodesalud* getcentro() { return this->asociado; }
+	cVehiculo* asignarvehiculo(cCentrodesalud* aux);
+#pragma endregion
+
+#pragma region Getters
+	eTipodeSangre gettiposangre() { return this->tipodesangre; };
+	cCentrodesalud* getcentro() { return this->asociado; };
+	
 	
 #pragma endregion
 

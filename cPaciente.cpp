@@ -8,29 +8,36 @@ cPaciente::cPaciente(string _nombre, string _sexo, int _numtelefono) {
 	
 }
 
-string cPaciente::to_string() {
+string cPaciente::To_string() {
 	return this->nombre + "" + this->sexo + "" + std::to_string(this->numtelefono);
 }
 
 void cPaciente::ImprimirPaciente() {
-	cout << this->to_string();
+	cout << this->To_string();
 }
 
 cPaciente::~cPaciente() {
 
 }
-eVehiculo cPaciente::asignarvehiculo(cCentrodesalud* aux) {
+cVehiculo* cPaciente::asignarvehiculo(cCentrodesalud* aux) {
+	cVehiculo* tor = NULL;
 	if (aux->getprovincia() == this->asociado->getprovincia()) {
+		
 		if (aux->getpartido() == this->asociado->getpartido())
-			return eVehiculo::ambulancia;
+		tor = new cAmbulancia;
+			return tor;
 	}
 
 	if (aux->getprovincia() == this->asociado->getprovincia()) {
+		
 		if (aux->getpartido() != this->asociado->getpartido())
-			return eVehiculo::avion;
+			tor = new cHelicoptero;
+			return tor;
 	}
 	if (aux->getprovincia() != this->asociado->getprovincia()) {
-		return eVehiculo::helicoptero;
+		
+		tor = new cAvion;
+		return tor;
 	}
-
+	return tor;
 }

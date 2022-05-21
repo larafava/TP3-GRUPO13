@@ -3,6 +3,8 @@
 #include "cPaciente.h"
 #include "cFecha.h"
 #include "cLista.h"
+#include "cReceptores.h"
+
 #ifdef _MSC_VER
 #define _CRT_SECURE_NO_WARNINGS
 #endif
@@ -17,6 +19,7 @@ private:
 	tm fecha;
 	cFecha* fechayhoradefallecimiento;
 	cFecha* fechayhoradeablacion;
+	cFecha* Hoy;
 	string patologia;
 	eEstado estado;
 	cLista<eOrganos>* listadeorganos;
@@ -29,11 +32,21 @@ public:
 #pragma endregion
 
 #pragma region Metodos
-	string to_string();
+	string To_string();
 	void ImprimirDonante();
-	void SetAblacion();
+	int coincidencia(cReceptores*p);
+	bool esdonante();
+	bool MismoDia(cFecha* fecha1, cFecha* fecha2);
+	
+	
+#pragma endregion
 
+#pragma region Getters y setter
+	void SetAblacion();
+	void Sethoy();
 	tm getfechaablacion() { return this->fecha; }
 	cLista<eOrganos>* getlistaorganos() { return this->listadeorganos; }
+	
+#pragma endregion
 };
 

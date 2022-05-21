@@ -11,5 +11,3 @@ string estadostring(eEstado estado);
 
 enum class eOrganos{corazón, hígado, páncreas, huesos, riñón, pulmones, intestino, piel, córneas};
 string organosdonarstring(eOrganos organos);
-
-enum class eVehiculo { ambulancia, avion, helicoptero };

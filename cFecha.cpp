@@ -85,3 +85,7 @@ bool cFecha::fechamenor(cFecha* aux) {
 
 	return tor;
 }
+
+
+
+

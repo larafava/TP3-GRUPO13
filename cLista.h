@@ -20,10 +20,10 @@ public:
 	void Insertar(T1*P); 
 	//T1* Quitar(T1 clave);
 	//T1* Quitar(T1* objeto);
-	T1* Quitar(int pos);
+	T1* Quitar(unsigned int pos);
 
 	void Eliminar(int pos);
-
+	
 	//void Eliminar(T3 clave);
 	T1* Buscar(int pos);
 
@@ -36,7 +36,10 @@ public:
 	void EliminarenPos(unsigned int pos);
 	void Switch(unsigned int pos1, unsigned int pos2);
 	int getCA() const { return ca; };
-	void operator+(T1 *p) { Insertar(p); };
+	//string to_string() { return ""; };
+	void operator+(T1* p) { Insertar(p); };
+	void operator-(T1* p) { Eliminar(p); };
+	friend ostream& operator<< <>(ostream& out, cLista<T1>& Lista);
 	
 
 	T1* operator[](unsigned int pos)
@@ -48,7 +51,7 @@ public:
 };
 
 template <class T1>	
-cLista<T1>::cLista(unsigned int T)
+inline cLista<T1>::cLista(unsigned int T)
 {
 	t = T;
 	ca = 0;
@@ -67,7 +70,7 @@ cLista<T1>::cLista(unsigned int T)
 
 
 template <class T1>
-cLista<T1>::~cLista(void)
+inline cLista<T1>::~cLista(void)
 {
 	try {
 		if (lista != NULL) {
@@ -86,7 +89,7 @@ cLista<T1>::~cLista(void)
 
 
 template <class T1>
-void cLista<T1>::Insertar(T1*P)
+inline void cLista<T1>::Insertar(T1*P)
 {
 	if (ca<t)
 		lista[ca++] = P;
@@ -94,21 +97,21 @@ void cLista<T1>::Insertar(T1*P)
 }
 
 template <class T1>
-void cLista<T1>::Switch(unsigned int pos1, unsigned int pos2) {
+inline void cLista<T1>::Switch(unsigned int pos1, unsigned int pos2) {
 	T1* aux = NULL;
 	if (pos1 > t || pos2 > t)
 		throw new exception("Posicion/es invalida/s");
 	aux = lista[pos1];
 	lista[pos1] = lista[pos2];
-	lista[pos2] = aux;
+	lista[ca] = NULL;
+	return aux;
 }
 
 template <class T1>
-T1* cLista<T1>::Quitar(int pos)
-{
-	unsigned int i = BuscarAtPos(pos);
+inline T1* cLista<T1>::Quitar(unsigned int pos) {
+	unsigned int i = BuscarAtPos(lista[pos]);
 	if (i >= ca)return NULL;
-	T1 *aux = NULL;
+	T1* aux = NULL;
 	aux = lista[i];
 	ca--;
 	for (unsigned int j = i; j < ca; j++)
@@ -119,7 +122,6 @@ T1* cLista<T1>::Quitar(int pos)
 	lista[ca] = NULL;
 	return aux;
 }
-
 /*template <class T1, class T2, class T3>
 T1* cLista<T1, T2, T3>::Quitar(T3 clave)
 {
@@ -138,7 +140,7 @@ T1* cLista<T1, T2, T3>::Quitar(T3 clave)
 }*/
 
 template <class T1>
-T1* cLista<T1>::QuitarPos(unsigned int pos) {
+inline T1* cLista<T1>::QuitarPos(unsigned int pos) {
 
 	if (pos >= ca)return NULL;
 	T1 *aux = NULL;
@@ -153,7 +155,7 @@ T1* cLista<T1>::QuitarPos(unsigned int pos) {
 }
 
 template <class T1>
-void cLista<T1>::Eliminar(int pos)
+inline void cLista<T1>::Eliminar(int pos)
 {
 	T1 *aux = Quitar(pos);
 	if (aux != NULL)
@@ -171,7 +173,7 @@ void cLista<T1, T2, T3>::Eliminar(T3 clave)
 }
 */
 template <class T1>
-void cLista<T1>::EliminarenPos(unsigned int pos)
+inline void cLista<T1>::EliminarenPos(unsigned int pos)
 {
 	if (pos >= ca)return;
 	delete lista[pos];
@@ -185,7 +187,7 @@ void cLista<T1>::EliminarenPos(unsigned int pos)
 }
 
 template <class T1>
- int cLista<T1>::BuscarAtPos(T1*pos)
+inline int cLista<T1>::BuscarAtPos(T1*pos)
 {
 	for (int i = 0; i < ca; i++)
 	{
@@ -207,7 +209,7 @@ unsigned int cLista<T1, T2, T3>::BuscarAtPos(T3 Clave)
 }*/
 
 template <class T1>
-T1* cLista<T1>::Buscar(int pos)
+inline T1* cLista<T1>::Buscar(int pos)
 {
 
 	if (pos<ca)
@@ -225,3 +227,13 @@ T1* cLista<T1, T2, T3>::Buscar(T3 Clave)
 		return lista[pos];
 	return NULL;
 }*/
+
+template <class T1>
+ ostream& operator<< <>(ostream& out, cLista<T1>& Lista)
+{
+	 for (int i = 0; i < Lista.ca; i++)
+	 {
+		 out << Lista.lista[i]->To_string() << endl;
+	 }
+	 return out;
+}
